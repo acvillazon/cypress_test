@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "test": "cypress open --browser chrome --e2e",
-    "test:headless": "cypress run --browser chrome --e2e"
+    "test:headless": "NO_COLOR=1 cypress run --browser chrome --e2e"
   },
   "keywords": [],
   "author": "",

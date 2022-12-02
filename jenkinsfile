@@ -27,5 +27,16 @@ pipeline{
                 sh "npm run test:headless"
             }
         }
+
+        stage('SCM') {
+            checkout scm
+        }
+
+        stage('SonarQube Analysis') {
+            def scannerHome = tool 'sonar_testing';
+                withSonarQubeEnv() {
+                sh "${scannerHome}/bin/sonar-scanner"
+            }
+        }
     }
 }

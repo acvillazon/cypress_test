@@ -16,7 +16,7 @@ pipeline{
         stage("install"){
             steps{
                 git branch: 'main', url: 'https://github.com/acvillazon/cypress_test.git'
-                sh 'npm install'
+                sh 'npm install --allow-root cypress'
             }
         }
 

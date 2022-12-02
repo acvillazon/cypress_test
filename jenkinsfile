@@ -12,29 +12,20 @@ pipeline{
     //     string(name: "container_port", defaultValue:'80', description:"")
     // }
 
-    // stages{
-    //     stage("install"){
-    //         steps{
-    //             git branch: 'main', url: 'https://github.com/acvillazon/cypress_test.git'
-    //             sh 'npm install --allow-root cypress'
-    //         }
-    //     }
-
-    //     stage("Test"){
-    //         steps{
-    //             sh 'npm config set user 0'
-    //             sh 'npm config set unsafe-perm true'
-    //             sh 'npm run test'
-    //         }
-    //     }
-
-    // }
     stages {
-        stage('build and test') {
-        steps {
-            sh 'npm ci'
-            sh "npm run test:headless"
+
+        stage("Build"){
+            steps{
+                git branch: 'main', url: 'https://github.com/acvillazon/cypress_test.git'
+                sh 'npm ci'
+                sh 'npm install'
+            }
         }
+
+        stage('Test') {
+            steps {
+                sh "npm run test:headless"
+            }
         }
     }
 }

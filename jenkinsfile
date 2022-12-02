@@ -13,14 +13,12 @@ pipeline{
     }
 
     stages{
-        // stage("install"){
-        //     steps{
-        //         git branch: 'main', url: 'https://github.com/acvillazon/cypress_test.git'
-        //         dir('frontend'){
-        //             sh 'npm install'
-        //         }
-        //     }
-        // }
+        stage("install"){
+            steps{
+                git branch: 'main', url: 'https://github.com/acvillazon/cypress_test.git'
+                sh 'npm install'
+            }
+        }
 
         stage("Test"){
             steps{

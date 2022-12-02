@@ -1,0 +1,31 @@
+pipeline{
+    agent any
+
+    tools{
+        nodejs "node_js"
+    }
+
+    parameters{
+        string(name: "container_name", defaultValue: 'test_cypress', description:"test")
+        string(name: "image_name", defaultValue:'pagina_img', description:"")
+        string(name: "tag_image", defaultValue:'lts', description:"")
+        string(name: "container_port", defaultValue:80, description:"")
+    }
+
+    stages{
+        // stage("install"){
+        //     steps{
+        //         git branch: 'main', url: 'https://github.com/acvillazon/cypress_test.git'
+        //         dir('frontend'){
+        //             sh 'npm install'
+        //         }
+        //     }
+        // }
+
+        stage("Test"){
+            steps{
+                sh 'npm run test'
+            }
+        }
+    }
+}

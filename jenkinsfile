@@ -22,11 +22,11 @@ pipeline{
             }
         }
 
-        stage('Test') {
-            steps {
-                sh "npm run test:headless"
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         sh "npm run test:headless"
+        //     }
+        // }
 
         stage('SCM') {
             steps{

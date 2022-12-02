@@ -9,7 +9,7 @@ pipeline{
         string(name: "container_name", defaultValue: 'test_cypress', description:"test")
         string(name: "image_name", defaultValue:'pagina_img', description:"")
         string(name: "tag_image", defaultValue:'lts', description:"")
-        string(name: "container_port", defaultValue:80, description:"")
+        string(name: "container_port", defaultValue:'80', description:"")
     }
 
     stages{

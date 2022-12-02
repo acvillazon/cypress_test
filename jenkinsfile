@@ -34,10 +34,19 @@ pipeline{
             }
         }
 
-        stage('SonarQube Analysis') {
-            steps{
-                def scannerHome = tool 'sonar_testing';
-                    withSonarQubeEnv() {
+        // stage('SonarQube Analysis') {
+        //     steps{
+        //         def scannerHome = tool 'sonar_testing';
+        //             withSonarQubeEnv() {
+        //             sh "${scannerHome}/bin/sonar-scanner"
+        //         }
+        //     }
+        // }
+
+        node {
+            stage('SonarQube analysis') {
+                def scannerHome = tool name: 'sonar_scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
+                withSonarQubeEnv('SonarQube') { 
                     sh "${scannerHome}/bin/sonar-scanner"
                 }
             }

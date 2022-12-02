@@ -1,5 +1,5 @@
 
-# Cypress + Jenkins (CI)
+# Cypress + Jenkins + Sonar (CI)
 
 This is a small and basic proyect, which there have no funcionalities 
 but a lot of Funcional tests.
@@ -10,9 +10,10 @@ but a lot of Funcional tests.
 - Cypress 10
 - Node Js 19.2.0
 - Docker (Jenkins)
+- SonarQube
 
 
-## Deployment
+## Configure Jenkins and Upload proyect to Github.
 
 To run this project we need to install docker in our machine or 
 in a cloud machine. We download the docker image from docker hub and
@@ -66,4 +67,63 @@ pipeline{
         }
     }
 }
+````
+
+## Configure SonarQube.
+
+For this exercise, we are quickly going to deploy Sonar + Postgress with Docker using a docker-compose.yml
+The file must looks like the next
+
+````
+version: '2'
+ 
+services:
+  sonarqube:
+    image: sonarqube
+    ports:
+      - "9000:9000"
+    networks:
+      - sonarnet
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/sonar
+      - SONARQUBE_JDBC_USERNAME=sonar
+      - SONARQUBE_JDBC_PASSWORD=sonar
+    volumes:
+      - sonarqube_conf:/opt/sonarqube/conf
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+      
+  db:
+    image: postgres
+    networks:
+      - sonarnet
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+    volumes:
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
+      
+networks:
+  sonarnet:
+    driver: bridge
+ 
+volumes:
+  sonarqube_conf:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_bundled-plugins:
+  postgresql:
+  postgresql_data:
+````
+
+If for any reason the container have problems, probably you should change the max_map_count of your VM.
+
+````
+open powershell
+wsl -d docker-desktop
+sysctl -w vm.max_map_count=262144
+echo "vm.max_map_count = 262144" > /etc/sysctl.d/99-docker-desktop.conf
+Restart docker-desktop
 ````

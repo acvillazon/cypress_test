@@ -44,13 +44,15 @@ pipeline{
         // }
 
         stage('SonarQube analysis') {
-            script {
-                // requires SonarQube Scanner 2.8+
-                scannerHome = tool 'sonar_testing'
-            }
-            // def scannerHome = tool name: 'sonar_testing', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
-            withSonarQubeEnv('SonarQube') { 
-                sh "${scannerHome}/bin/sonar-scanner"
+            steps{
+                script {
+                    // requires SonarQube Scanner 2.8+
+                    scannerHome = tool 'sonar_testing'
+                }
+                // def scannerHome = tool name: 'sonar_testing', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
+                withSonarQubeEnv('SonarQube') { 
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
             }
         }
     }

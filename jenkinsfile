@@ -1,6 +1,6 @@
 pipeline{
     agent any
-    
+
     tools{
         nodejs "node_js"
     }
@@ -22,7 +22,9 @@ pipeline{
 
         stage("Test"){
             steps{
-                sh 'sudo npm run test'
+                sh 'npm config set user 0'
+                sh 'npm config set unsafe-perm true'
+                sh 'npm run test'
             }
         }
     }

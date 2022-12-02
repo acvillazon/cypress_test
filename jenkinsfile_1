@@ -1,0 +1,31 @@
+pipeline{
+    agent any
+
+    tools{
+        nodejs "node_js"
+    }
+
+    // parameters{
+    //     string(name: "container_name", defaultValue: 'test_cypress', description:"test")
+    //     string(name: "image_name", defaultValue:'pagina_img', description:"")
+    //     string(name: "tag_image", defaultValue:'lts', description:"")
+    //     string(name: "container_port", defaultValue:'80', description:"")
+    // }
+
+    stages{
+        stage("install"){
+            steps{
+                git branch: 'main', url: 'https://github.com/acvillazon/cypress_test.git'
+                sh 'npm install --allow-root cypress'
+            }
+        }
+
+        stage("Test"){
+            steps{
+                sh 'npm config set user 0'
+                sh 'npm config set unsafe-perm true'
+                sh 'npm run test'
+            }
+        }
+    }
+}

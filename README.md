@@ -138,7 +138,7 @@ and..... we need to put the same token into the configuration of Sonar Scan (Jen
 ````
 sonar.projectKey=Testing_Cypress_2
 sonar.host.url=http://localhost:9000
-sonar.login=squ_4c8fb90661eb310f2c9d3c99c503328e2250be5f
+sonar.login=************
 sonar.sourceEncoding=UTF-8
 sonar.sources=.
 ````

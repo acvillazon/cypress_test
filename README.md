@@ -127,3 +127,18 @@ sysctl -w vm.max_map_count=262144
 echo "vm.max_map_count = 262144" > /etc/sysctl.d/99-docker-desktop.conf
 Restart docker-desktop
 ````
+
+## Conectar Sonar con Jenkins
+
+The first thing, we need to do is create a new proyecto into Sonar.
+Later, we must create a new user with a new token authentication.
+That token authentication, we need to put it in the sonar-proyect as a sonar.login
+and..... we need to put the same token into the configuration of Sonar Scan (Jenkins), we need to set this token as a credentials
+
+````
+sonar.projectKey=Testing_Cypress_2
+sonar.host.url=http://localhost:9000
+sonar.login=squ_4c8fb90661eb310f2c9d3c99c503328e2250be5f
+sonar.sourceEncoding=UTF-8
+sonar.sources=.
+````

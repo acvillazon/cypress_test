@@ -22,26 +22,17 @@ pipeline{
             }
         }
 
-        // stage('Test') {
-        //     steps {
-        //         sh "npm run test:headless"
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                sh "npm run test:headless"
+            }
+        }
 
         stage('SCM') {
             steps{
                 checkout scm
             }
         }
-
-        // stage('SonarQube Analysis') {
-        //     steps{
-        //         def scannerHome = tool 'sonar_testing';
-        //             withSonarQubeEnv() {
-        //             sh "${scannerHome}/bin/sonar-scanner"
-        //         }
-        //     }
-        // }
 
         stage('SonarQube analysis') {
             steps{
